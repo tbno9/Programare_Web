@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferma BoCO</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <center>
+        <h1>Bine ați venit la Ferma BoCO!</h1>
+        <h2>Marfă de Dănești: când mănânci, întinerești!</h2>
+        <img src="vacute.png" alt="o vaca grasa" title="salllut" width="500" height="300">
+    </center>
+
+    <div id="continut-principal">
+        <h3>Despre proiect</h3>
+        <p>
+            Aplicația web <strong>Ferma BoCO</strong> este concepută pentru administrarea eficientă a fermei noastre de familie. <br>
+            Scopul acestui proeict este să aducem clienții mai aproape de natură, oferind un mediu <b>prietenos</b> și o alimentație <span class="text-sanatos">100% naturală și de încredere</span>.
+        </p>
+
+        <h3>Ce servicii oferim?</h3>
+        <ul>
+            <li>Cumpărături:
+                <ul>
+                    <li>Lactate proaspete și brânzeturi maturare</li>
+                    <li>Carne de la păsări crescute liber</li>
+                    <li>Preparate tradiționale</li>
+                </ul>
+            </li>
+            
+            <li>Experiențe:
+                <ul>
+                    <li>Vizitarea fermei și a grădinilor de legume</li>
+                    <li>Interacțiune și hrănire animale (iepuri, oi, viței)</li>
+                    <li>Plimbări cu căruța în împrejurimi</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>Pași rezervare vizită</h3>
+        <ol type="1" start="1">
+            <li>Pregătirea fermei pentru vizitatori</li>
+            <li>Deschiderea porților și a rezervărilor</li>
+        </ol>
+
+        <br>
+        <table border="1" width="100%" bgcolor="#f1f8e9" align="center">
+            <tr>
+                <th colspan="2" bgcolor="#4CAF50" align="center" valign="middle">Oferta Ferma BoCO</th>
+            </tr>
+            <tr>
+                <td width="50%" align="left" valign="top">
+                    <a href="magazin.html" target="_self">Magazinul fermei</a>
+                </td>
+                <td width="50%" align="left" valign="bottom">
+                    Rezervări
+                </td>
+            </tr>
+        </table>
+
+        <br>
+
+        <h3>Pentru a programa o vizită, utilizatorul se poate înregistra completând formularul următor:</h3>
+        <form action="/trimite_date" method="post">
+            <fieldset>
+                <legend>Date de contact și detalii vizită</legend>
+                <p>
+                    Nume vizitator:
+                    <input type="text" name="nume_client" size="30" maxlength="50" value="" title="Introdu numele tău complet" label="nume">
+                </p>
+
+                <p>
+                    Număr persoane (maxim 15):
+                    <input type="number" name="nr_persoane" max="15" step="1" value="2">
+                </p>
+                <p>
+                    Doresc să primesc oferte pe email:
+                    <input type="checkbox" name="newsletter" value="da" checked>
+                </p>
+                <p>
+                    Alegeți experiențele dorite (puteți selecta mai multe):<br>
+                    <select name="servicii_alese" multiple size="4">
+                        <option value="lactate" selected>Degustare lactate</option>
+                        <option value="animale">Joc cu animalele</option>
+                        <option value="calarie">Curs echitație</option>
+                        <option value="caruta">Plimbare cu calul</option>
+                        <option value="caruta">sa mearga scrollul:]</option>
+                    </select>
+                </p>
+                <p>
+                    Lasă-ne un mesaj cu detalii suplimentare:<br>
+                    <textarea name="mesaj" cols="50" rows="5">Așteptăm cu nerăbdare vizita ta. Scrie-ne aici întrebările tale...</textarea>
+                </p>
+            </fieldset>
+        </form>
+    </div>
+
+</body>
+</html>
