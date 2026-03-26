@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Catalog Filme</title>
+</head>
+<body>
+
+    <header>
+        <h1>Catalog de filme</h1>
+        <h2>Relaxeaza-te vizionand un filmulet:] si scrie istoricul vizionarilor tale</h2>
+        <p><b>AICI</b> vor fi prezentate <strong>muuuulte filme</strong>, pe categorii, pe care le poti viziona cand ai <em>CHEF</em>!.<br> ADAUGA LA COLECTIA DE FILME VIZIONATE</p>
+        
+        <img src="https://zigzorg.com/wp-content/uploads/2015/12/Collage-Movies-5-50p.jpg" alt="Filme" width="400" height="300" title="prezentare_app"> 
+        <div style="height: 20px; background-color: #ff429d;"> 
+                <span>Acesta este un catalog informativ, cu sugestie de prezentare hehe!!!!!!!!!!!!!!!!!!!!!!!!</span>
+        </div>
+    </header>
+
+    <br>
+
+    <fieldset id="sectiune-formular">
+        <legend>ADAUGA UN FILM NOU</legend> 
+        <form id="formFilm">
+            <label>Titlu:</label>
+            <input type="text" id="titlu" name="titluFilm" maxlength="50" size="30" value="" placeholder="introdu numele filmului">
+            <br><br>
+            
+            <label>An aparitie:</label>
+            <input type="number" id="an" min="1900" max="2026" step="1" value="2024"> 
+            <br><br> 
+            
+            <label>Genul filmului:</label>
+            <select id="gen" multiple> 
+                <option value="actiune" selected>actiune</option> 
+                <option value="comedie">comedie</option>
+                <option value="drama">drama</option>
+                <option value="horror">horror</option>
+                <option value="SF">SF</option>
+            </select> <br><br>
+
+            <label>Optiuni:</label>
+            <input type="checkbox" id="vizionat" checked> Vizionat
+            <input type="checkbox" id="favorit"> Favorit
+            <input type="checkbox" id="indisponibil" disabled> Indisponibil <br><br> 
+            
+            <label>Format:</label>
+            <input type="radio" name="format" value="DVD" checked> DVD
+            <input type="radio" name="format" value="Blu-ray"> Blu-ray <br><br> 
+            
+            <label>Descriere scurta:</label><br>
+            <textarea readonly cols="30" rows="3">text pre-completat care nu poate fi editat</textarea> <br><br> 
+            
+            <input type="submit" value="Salveaza">
+            <input type="reset" value="Goleste formular"> 
+        </form>
+    </fieldset>
+
+    <hr>
+
+    <table id="tabelFilme" border="1" width="80%" bgcolor="#ff429d" align="center"> 
+        <thead>
+            <tr>
+                <th>Titlu</th> 
+                <th>Regizor</th>
+                <th>An</th>
+                <th>Rating</th>
+            </tr>
+        </thead>
+        <tbody id="corpTabel">
+            <tr>
+                <td>Inception</td>
+                <td rowspan="2">Christopher Nolan</td> 
+                <td>2010</td>
+                <td>8.8</td>
+            </tr>
+            <tr>
+                <td>Interstellar</td>
+                <td>2014</td>
+                <td>8.7</td>
+            </tr>
+            <tr>
+                <td>The Dark Knight</td>
+                <td>Christopher Nolan</td>
+                <td>2008</td>
+                <td>9.0</td>
+            </tr>
+            <tr>
+                <td>The Matrix</td>
+                <td>Lana Wachowski</td>
+                <td>1999</td>
+                <td>8.7</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" align="center" id="totalFilme">Total filme in tabel: 4</td> 
+            </tr>
+        </tfoot>
+    </table>
+
+    <hr>
+
+    <h3>Pasii pentru a adauga un film:</h3>
+    <ol start="1" type="I"> 
+        <li>Completati titlul si anul</li>
+        <li>Alegeti genul dorit</li>
+        <li>Apasati butonul de salvare</li>
+    </ol>
+
+    <h3>Genuri disponibile rapid:</h3>
+    <ul> 
+        <li>Actiune</li>
+        <li>Comedie</li>
+        <li>SF</li>
+    </ul>
+
+    <p>
+        Surse externe: <br>
+        <a href="https://youtu.be/N0Vh65UrBK4?si=-7BHYbAGD71TxaSv" target="_blank" name="Trailer PRINTUL EGIPTULUI">Trailer PRINTUL EGIPTULUI</a> <br>
+        <a href="https://www.cinemacity.ro/#/" target="_blank" name="rt">CINEMA CITY </a>
+    </p>
+
+    <center>
+        <a href="#sectiune-formular">Mergi sus la formular</a> 
+    </center>
+
+    <br><br>
+
+
+
+    <script>
+        //2a
+        var numeCinema = "CineMEA";
+        let nrFilme = 9;
+        const pretBilet = 35.5;
+
+        // Afisare
+        console.log("Cinema: " + numeCinema);
+        document.write("<h3>Cinema: " + numeCinema + "</h3>");
+
+        //2b
+        function calculeazaCostBilete(pret, nrPersoane) {
+            if (nrPersoane > 5) {
+                return pret * nrPersoane * 0.8;
+            }
+            return pret * nrPersoane;
+        }
+
+        //functia anonima!!
+        var calculeazaRatingMediuSimplu = function(r1, r2, r3) {
+            var suma = r1 + r2 + r3;
+            return (suma / 3).toFixed(1);
+        };
+
+        //functie arrow 
+        const formateazaInfo = (titlu, an, rating) => {
+            return titlu + " (" + an + ") Rating: " + rating + "/10";
+        };
+
+        //2c
+        let costGrup = calculeazaCostBilete(pretBilet, 7);
+        console.log("Cost grup (7 pers): " + costGrup);
+
+        let ratingM = calculeazaRatingMediuSimplu(8.5, 7.2, 9.0);
+        let info = formateazaInfo("Inception", 2010, ratingM);
+        document.write("<p>Exemplu formatare: " + info + "</p>");
+
+
+
+        //3a array de obiecte
+        let listaFilme = [
+            { titlu: "Inception", regizor: "C. Nolan", an: 2010, rating: 8.8, gen: "SF", vizionat: true },
+            { titlu: "Interstellar", regizor: "C. Nolan", an: 2014, rating: 8.7, gen: "SF", vizionat: true },
+            { titlu: "The Matrix", regizor: "Wachowski", an: 1999, rating: 8.7, gen: "SF", vizionat: false },
+            { titlu: "Joker", regizor: "T. Phillips", an: 2019, rating: 8.4, gen: "Drama", vizionat: true },
+            { titlu: "Parasite", regizor: "Bong Joon-ho", an: 2019, rating: 8.5, gen: "Drama", vizionat: false },
+            { titlu: "Up", regizor: "P. Docter", an: 2009, rating: 8.3, gen: "Comedie", vizionat: true }
+        ];
+
+        console.log("filme cu rating > 8.0 (cu forEach):");
+        listaFilme.forEach(f => { if(f.rating > 8.0) console.log(f.titlu); });
+
+        let numeFilmeFormatate = listaFilme.map(f => f.titlu + " (" + f.an + ") " + f.rating + "/10");
+        console.log("array mapat:", numeFilmeFormatate);
+
+        let nevizionate = listaFilme.filter(f => f.vizionat === false);
+        console.log("Filme nevizionate:", nevizionate);
+
+        let sumaRating = listaFilme.reduce((total, f) => total + f.rating, 0);
+        console.log("medie ratinguri: " + (sumaRating / listaFilme.length).toFixed(2));
+
+        // 3b
+        var cinema = {
+            nume: "Cinema DACIA",
+            oras: "Baia MARE",
+            filme: listaFilme,
+            afiseazaCatalog: function() {
+                console.log("catalog CineMEA");
+                this.filme.forEach(f => console.log(f.titlu + " - " + f.regizor));
+            },
+            calculeazaRatingMediu: function() {
+                let suma = this.filme.reduce((acc, f) => acc + f.rating, 0);
+                return (suma / this.filme.length).toFixed(2);
+            },
+            cautaFilm: function(titluFilm) {
+                return this.filme.find(f => f.titlu.toLowerCase() === titluFilm.toLowerCase());
+            },
+            filtreazaDupaGen: function(gen) {
+                return this.filme.filter(f => f.gen === gen);
+            }
+        };
+
+        // Apeluri
+        cinema.afiseazaCatalog();
+        console.log("Rating mediu catalog: " + cinema.calculeazaRatingMediu());
+        console.log("Cautare 'Inception':", cinema.cautaFilm("Inception"));
+        console.log("Cautare 'Avatar' (invalid):", cinema.cautaFilm("Avatar"));
+
+
+        //4 INTERACTIUNE FORMULAR SI DOM
+
+        // 4a
+        document.getElementById("formFilm").addEventListener("submit", function(event) {
+            event.preventDefault(); 
+
+            let titluInput = document.getElementById("titlu").value;
+            let anInput = parseInt(document.getElementById("an").value);
+            let genSelect = document.getElementById("gen").selectedOptions;
+
+            // Validari
+            if (titluInput == "") {
+                alert("Titlul nu poate fi gol!");
+                return;
+            }
+            if (anInput < 1900 || anInput > 2026) {
+                alert("Anul trebuie sa fie intre 1900 si 2026!");
+                return;
+            }
+            if (genSelect.length == 0) {
+                alert("Selectati cel putin un gen!");
+                return;
+            }
+
+            // 4b
+            let filmNou = {
+                titlu: titluInput,
+                regizor: "Necunoscut", 
+                an: anInput,
+                rating: 0,
+                gen: genSelect[0].value,
+                vizionat: document.getElementById("vizionat").checked
+            };
+
+            listaFilme.push(filmNou);
+
+            //Adaugare rand in tabel
+            let tabel = document.getElementById("corpTabel");
+            let tr = document.createElement("tr");
+
+            let td1 = document.createElement("td"); td1.innerText = filmNou.titlu; tr.appendChild(td1);
+            let td2 = document.createElement("td"); td2.innerText = filmNou.regizor; tr.appendChild(td2);
+            let td3 = document.createElement("td"); td3.innerText = filmNou.an; tr.appendChild(td3);
+            let td4 = document.createElement("td"); td4.innerText = filmNou.rating; tr.appendChild(td4);
+
+            tabel.appendChild(tr);
+
+            // Actualizare total
+            document.getElementById("totalFilme").innerText = "Total filme in tabel: " + listaFilme.length;
+
+            alert("Film adaugat cu succes!");
+            form.reset(); 
+        });
+    </script>
+</body>
+</html>
