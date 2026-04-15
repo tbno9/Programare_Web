@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tester Cod JavaScript</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; padding: 20px; }
+        .container { display: flex; gap: 20px; }
+        .left-panel, .right-panel { flex: 1; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        textarea { width: 100%; height: 250px; font-family: monospace; font-size: 14px; padding: 10px; box-sizing: border-box; }
+        .buttons { margin-top: 10px; margin-bottom: 20px;}
+        button { padding: 10px 15px; cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 4px; margin-right: 5px; }
+        button:hover { background-color: #0056b3; }
+        #outputBox { background-color: #222; color: #0f0; padding: 10px; min-height: 150px; font-family: monospace; border-radius: 4px; overflow-y: auto; }
+        #targetDiv { border: 2px dashed #333; padding: 20px; margin-top: 15px; text-align: center; transition: background-color 0.5s; }
+        .menu-ex { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 15px; }
+        .menu-ex button { background-color: #28a745; font-size: 12px; }
+        .menu-ex button:hover { background-color: #1e7e34; }
+    </style>
+</head>
+<body>
+
+    <h2>Tester JavaScript - Programare Web</h2>
+    
+    <div class="menu-ex">
+        <button onclick="loadEx(0)">Ex 1: Carti (Sincron)</button>
+        <button onclick="loadEx(1)">Ex 2: Carti (Asincron)</button>
+        <button onclick="loadEx(2)">Ex 3: Culoare (3 sec)</button>
+        <button onclick="loadEx(3)">Ex 4: Culoare (5 sec - Interval)</button>
+        <button onclick="loadEx(4)">Ex 5: Callbacks</button>
+        <button onclick="loadEx(5)">Ex 6: Add Callback</button>
+    </div>
+
+    <div class="container">
+        <div class="left-panel">
+            <h3>Cod Sursa:</h3>
+            <textarea id="codeArea"></textarea>
+            <div class="buttons">
+                <button onclick="runCode()">RUN (Executa)</button>
+                <button onclick="clearAll()" style="background-color: #dc3545;">CLEAR (Curata)</button>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <h3>My Console (Rezultate):</h3>
+            <div id="outputBox"></div>
+            
+            <div id="targetDiv">
+                Aceasta este sectiunea de text pentru exercitiile cu culori.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. Functia my.log() care scrie in consola noastra falsa de pe ecran
+        const my = {
+            log: function(msg) {
+                const output = document.getElementById("outputBox");
+                output.innerHTML += msg + "<br>"; // Adaugam mesajul si trecem la rand nou
+            }
+        };
+
+        // Redirectionam si console.log clasic tot catre my.log, pentru a afisa si codul care foloseste console.log
+        console.log = function(msg) { my.log(msg); };
+
+        // 2. Tabloul (Array-ul) cu codul pentru fiecare exercitiu
+        let arrex = [
+// Exercitiul 0: 5 carti, varianta sincrona
+`// Array cu 5 titluri de carti
+let carti = ['Ion', 'Morometii', 'Enigma Otiliei', 'Baltagul', 'Maitreyi'];
+
+my.log("--- Afisare Sincrona ---");
+// Parcurgem array-ul si afisam imediat fiecare carte
+carti.forEach(function(carte, index) {
+    my.log((index + 1) + ". " + carte);
+});
+my.log("Afisarea s-a terminat!");`,
+
+// Exercitiul 1: 5 carti, varianta asincrona (cate una la 2 secunde)
+`let carti = ['Ion', 'Morometii', 'Enigma Otiliei', 'Baltagul', 'Maitreyi'];
+
+function ArrayPlusDelay(array, delegate, delay) {
+    array.forEach(function (el, i) { 
+        // setTimeout amana executia codului din interior
+        setTimeout(function() { 
+            delegate(array[i]);
+        }, i * delay); // Inmultim indexul cu delay-ul (0s, 2s, 4s, 6s, 8s)
+    });
+}
+
+my.log("--- Afisare Asincrona (asteapta...) ---");
+ArrayPlusDelay(carti, function(obj) { 
+    my.log("Carte afisata: " + obj); 
+}, 2000);`,
+
+// Exercitiul 2: Schimba culoarea dupa 3 secunde
+`my.log("Asteptam 3 secunde pentru a schimba culoarea...");
+
+setTimeout(function() {
+    let div = document.getElementById("targetDiv");
+    div.style.backgroundColor = "lightblue";
+    my.log("Culoarea a fost schimbata (setTimeout)!");
+}, 3000);`,
+
+// Exercitiul 3: Schimba culoarea la fiecare 5 secunde (setInterval)
+`my.log("Culoarea se va schimba din 5 in 5 secunde...");
+let culori = ['#ff9999', '#99ff99', '#9999ff', '#ffff99'];
+let indexCuloare = 0;
+
+// setInterval repeta codul la nesfarsit, la un anumit interval
+window.myInterval = setInterval(function() {
+    let div = document.getElementById("targetDiv");
+    div.style.backgroundColor = culori[indexCuloare];
+    my.log("Interval 5s: Culoare schimbata in " + culori[indexCuloare]);
+    
+    indexCuloare++;
+    if(indexCuloare >= culori.length) { indexCuloare = 0; } // O luam de la capat
+}, 5000);`,
+
+// Exercitiul 4: Callbacks simple (din exemplul tau)
+`function finished() {
+    my.log("Sarcina lunga s-a terminat! (Asta este callback-ul)");
+}
+
+function thingThatTakesALongTime(callbackFunction) {
+    my.log("Se proceseaza ceva greu... (asteapta 2 secunde)");
+    setTimeout(function() {
+        // Aici se apeleaza functia trimisa ca parametru
+        callbackFunction(); 
+    }, 2000);
+}
+
+// Trimitem functia 'finished' ca parametru, FARA paranteze ()
+thingThatTakesALongTime(finished);`,
+
+// Exercitiul 5: Functia add cu callback
+`function add(x, y, callback) {
+    my.log("Start functie de adunare...");
+    
+    // Simulam ca dureaza 2 secunde sa adunam
+    setTimeout(function() {
+        var ret = x + y;
+        callback(ret); // Trimitem rezultatul inapoi prin callback
+    }, 2000);
+}
+
+// Apelam functia si definim pe loc ce facem cu rezultatul
+add(10, 20, function(rezultat) {
+    my.log("Rezultatul adunarii este: " + rezultat);
+});`
+        ];
+
+        // 3. Functia pentru incarcarea exercitiilor in Textarea
+        function loadEx(nr) {
+            document.getElementById("codeArea").value = arrex[nr];
+        }
+
+        // Incarcam automat primul exercitiu la deschiderea paginii
+        loadEx(0); 
+
+        // 4. Functia de executare a codului
+        function runCode() {
+            let code = document.getElementById("codeArea").value;
+            try {
+                // Folosim eval() pentru a rula codul citit din textarea ca si cum ar fi cod JavaScript real
+                eval(code);
+            } catch (eroare) {
+                // Daca utilizatorul greseste codul, afisam eroarea cu rosu
+                my.log("<span style='color:red'>Eroare: " + eroare.message + "</span>");
+            }
+        }
+
+        // 5. Functia de curatare
+        function clearAll() {
+            document.getElementById("outputBox").innerHTML = ""; // Sterge consola
+            document.getElementById("targetDiv").style.backgroundColor = "transparent"; // Reseteaza culoarea
+            
+            // Un truc pentru a opri toate intervalele si timerele care ar putea rula pe fundal
+            let highestId = window.setTimeout(function(){}, 0);
+            for (let i = 0; i < highestId; i++) {
+                window.clearTimeout(i);
+            }
+            my.log("Consola si actiunile in asteptare au fost sterse.");
+        }
+    </script>
+</body>
+</html>
