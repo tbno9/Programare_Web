@@ -1,0 +1,89 @@
+/* Resetare de bază */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f1e0be;
+    color: #3e2723; 
+    margin: 0;
+    padding: 20px;
+}
+
+#continut-principal {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #dcffd879;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    border-top: 5px solid #689f38; /* Verde iarbă */
+}
+
+
+h1 { color: #2e7d32; font-size: 2.5em; margin-bottom: 5px; } 
+h2 { color: #558b2f; font-size: 1.8em; margin-top: 0; font-style: italic; }
+h3 { color: #3e2723; border-bottom: 2px solid #091409; padding-bottom: 5px; }
+h4 { color: #4e342e; }
+h5, h6 { color: #5d4037; }
+
+
+img {
+    border-radius: 8px;
+    border: 3px solid #aed581; 
+}
+
+/* linkuri */
+a {
+    color: #2e7d32;
+    text-decoration: none;
+    font-weight: bold;
+}
+a:hover {
+    color: #1b5e20;
+    text-decoration: underline;
+}
+
+/* Tabel */
+table {
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+th {
+    color: white;
+    font-size: 1.1em;
+    padding: 10px;
+}
+td {
+    padding: 15px;
+}
+
+/* formular si inputuri */
+fieldset {
+    border: 2px solid #81c784;
+    border-radius: 8px;
+    background-color: #f1f8e9;
+    padding: 20px;
+}
+legend {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+input[type="text"], input[type="number"], select, textarea {
+    border: 1px solid #c5e1a5;
+    border-radius: 4px;
+    padding: 8px;
+    font-family: inherit;
+}
+input[type="text"]:focus, textarea:focus {
+    outline: none;
+    border-color: #689f38;
+    box-shadow: 0 0 5px rgba(104, 159, 56, 0.5);
+}
+
+/* Clasa specială creată în HTML */
+.text-sanatos {
+    color: #2e7d32;
+    font-weight: bold;
+    text-transform: uppercase;
+}

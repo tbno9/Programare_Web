@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Înregistrare - Ferma BoCO</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div id="continut-principal">
+        <h2>Creează un cont de fermier</h2>
+        <form action="/register" method="POST">
+            <fieldset>
+                <legend>Date cont nou</legend>
+                <p>Email: <input type="email" name="email" required></p>
+                <p>Parolă: <input type="password" name="password" required></p>
+                <button type="submit">Înregistrare</button>
+            </fieldset>
+        </form>
+        <p>Ai deja cont? <a href="/login">Loghează-te aici</a></p>
+    </div>
+</body>
+</html>

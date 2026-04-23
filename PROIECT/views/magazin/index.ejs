@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Cămara Fermei BoCO</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div id="continut-principal">
+        <h1>Salut, fermierule <%= user %>!</h1>
+        
+        <p>Ai vizitat magazinul de <strong><%= views %></strong> ori în această sesiune.</p>
+
+        <% if (ultimaVizita) { %>
+            <p><small>Ultima ta activitate a fost la ora: <%= ultimaVizita %></small></p>
+        <% } %>
+
+        <h3>Produse disponibile:</h3>
+        <table border="1" width="100%">
+            </table>
+
+        <br>
+        <a href="/logout" style="color: red;">Ieșire din cont (Logout)</a>
+    </div>
+</body>
+</html>
