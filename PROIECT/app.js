@@ -3,6 +3,11 @@ const express = require('express');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const path = require('path');
+const mongoose = require('mongoose');
+
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => console.log('CONECTAT CU SUCCES LA MONGODB ATLAS'))
+    .catch(err => console.error('EROARE CONECTARE MONGO:', err));
 
 // Importăm rutele și middleware-urile noastre
 const logger = require('./middleware/logger');

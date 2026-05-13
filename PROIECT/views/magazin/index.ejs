@@ -15,10 +15,23 @@
             <p><small>Ultima ta activitate a fost la ora: <%= ultimaVizita %></small></p>
         <% } %>
 
-        <h3>Produse disponibile:</h3>
+       <h3>Produse disponibile:</h3>
         <table border="1" width="100%">
-            </table>
-
+            <tr>
+                <th>Produs</th>
+                <th>Preț</th>
+                <th>Stoc</th>
+                <th>Descriere</th>
+            </tr>
+            <% produse.forEach(produs => { %>
+            <tr>
+                <td><%= produs.nume %></td>
+                <td><%= produs.pret %> RON</td>
+                <td><%= produs.stoc %></td>
+                <td><%= produs.descriere %></td>
+            </tr>
+            <% }) %>
+        </table>
         <br>
         <a href="/logout" style="color: red;">Ieșire din cont (Logout)</a>
     </div>

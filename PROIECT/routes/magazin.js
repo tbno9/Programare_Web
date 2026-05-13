@@ -1,21 +1,31 @@
 const express = require('express');
 const router = express.Router();
-const requireLogin = require('../middleware/requireLogin'); // Verifică dacă ai și acest folder/fișier!
-const produse = require('../db/produse'); // Verifică dacă ai folderul db și fișierul produse.js
+const requireLogin = require('../middleware/requireLogin');
 
-// Cerința 3.1: Protejăm rutele cu middleware-ul de autentificare [cite: 31]
+// 1. IMPORTĂ MODELUL PRODUS (Aceasta era linia care lipsea)
+const Produs = require('../models/Produs'); 
+
+// Cerința 3.1: Protejăm rutele
 router.use(requireLogin);
 
-// GET /magazin [cite: 21]
-router.get('/', (req, res) => {
-    // Cerința 2.3: Trimitem datele către EJS [cite: 23, 26]
-    req.session.views = (req.session.views || 0) + 1;
-    res.render('magazin/index', {
-        user: req.session.userId,
-        produse: produse,
-        vizite: req.session.views,
-        ultimaVizita: req.cookies.ultima_vizita || null
-    });
+// GET /magazin
+router.get('/', async (req, res) => {
+    try {
+        req.session.views = (req.session.views || 0) + 1;
+
+        // 2. Așteaptă datele din MongoDB
+        const produseDinDB = await Produs.find({});
+
+        res.render('magazin/index', {
+            user: req.session.userId,
+            produse: produseDinDB, // Trimitem produsele din baza de date
+            views: req.session.views,
+            ultimaVizita: req.cookies.ultima_vizita || null
+        });
+    } catch (err) {
+        console.error("Eroare la încărcarea magazinului:", err);
+        res.status(500).send("Eroare server");
+    }
 });
 
 module.exports = router;
