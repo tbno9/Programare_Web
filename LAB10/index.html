@@ -1,0 +1,68 @@
+<!-- <html>
+<script>
+function changeText(){
+ xmlhttp = new XMLHttpRequest();
+ xmlhttp.open("GET","http://localhost:8001/getstring", true);
+ xmlhttp.onreadystatechange=function() {
+ if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+ string=xmlhttp.responseText;
+ document.getElementById('test').innerHTML = string;
+ }
+ }
+ xmlhttp.send();
+}
+</script>
+<p id='test'>Acesta este index.html</p>
+<button onclick='javascript:changeText()'>Demo</button>
+</html> -->
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        #container-imagine svg, #container-imagine img {
+            width: 200px;
+            display: block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h3>Selectează o imagine:</h3>
+    <select id="listaImagini">
+        <option value="icecream.svg">inghetata</option>
+        <option value="cheese.svg">branza</option>
+        <option value="hat.svg">palarie</option>
+    </select>
+
+    <button id="btnIncarca">afiseaza imaginea prin AJAX</button>
+
+    <p id="statusText">Rezultat: </p>
+    <div id="container-imagine">
+        <!-- imaginea -->
+    </div>
+
+    <script>
+    $(document).ready(function () {
+        $("#btnIncarca").click(function(){
+            //luam din lista valoarea
+            var selectie = $("#listaImagini").val();
+
+            $.ajax('http://localhost:8001/user', {
+                type: 'POST',
+                data: { imagineCeruta: selectie }, 
+                success: function (data, status) {
+                    $('#statusText').text('Status: ' + status + ' | Fișier primit: ' + data);
+                    
+                    //stergere imagine veche, luare pe cea noua
+                    $('#container-imagine').html('<img src="/' + data + '" alt="Imagine SVG">');
+                },
+                error: function (jqXhr, textStatus, errorMessage) {
+                    $('#statusText').append(' Eroare: ' + errorMessage);
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>
