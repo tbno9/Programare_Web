@@ -1,0 +1,25 @@
+<nav class="navbar">
+    <a href="<%= role === 'admin' ? '/admin' : '/magazin' %>" class="navbar-brand">
+        Ferma <span>BoCo</span>
+    </a>
+
+    <ul class="navbar-links">
+        <% if (role === 'admin') { %>
+            <li><a href="/admin" class="<%= page === 'admin' ? 'active' : '' %>">Dashboard</a></li>
+            <li><a href="/admin/produse/adauga" class="<%= page === 'adauga-produs' ? 'active' : '' %>">+ Produs</a></li>
+            <li><a href="/admin/animale/adauga" class="<%= page === 'adauga-animal' ? 'active' : '' %>">+ Animal</a></li>
+        <% } else { %>
+            <li><a href="/magazin" class="<%= page === 'magazin' ? 'active' : '' %>">Magazin</a></li>
+            <li><a href="/ferma" class="<%= page === 'ferma' ? 'active' : '' %>">Ferma</a></li>
+            <li><a href="/cos" class="<%= page === 'cos' ? 'active' : '' %>">Coș</a></li>
+        <% } %>
+    </ul>
+
+    <div class="navbar-user">
+        <span class="navbar-email"><%= user %></span>
+        <% if (role === 'admin') { %>
+            <span class="badge-admin">Admin</span>
+        <% } %>
+        <a href="/logout" class="btn-logout">Ieșire</a>
+    </div>
+</nav>

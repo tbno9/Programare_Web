@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard – Ferma BoCo</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <%- include('../partials/navbar', { user, role, page: 'admin' }) %>
+
+    <div class="page-container">
+        <p class="page-tag">Administrator</p>
+        <h1>Dashboard</h1>
+        <p class="page-subtitle">Gestionează produsele, animalele și vizitele programate.</p>
+        
+        <div class="stats-row" style="grid-template-columns: repeat(4, 1fr);">
+            <div class="stat-box">
+                <div class="stat-value"><%= produse.length %></div>
+                <div class="stat-label">Produse</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value"><%= animale.length %></div>
+                <div class="stat-label">Animale</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value"><%= vizite.length %></div>
+                <div class="stat-label">Vizite programate</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value"><%= comenzi.length %></div>
+                <div class="stat-label">Comenzi</div>
+            </div>
+        </div>
+
+        <!-- PRODUSE -->
+        <div class="section-header">
+            <h2>Produse</h2>
+            <a href="/admin/produse/adauga" class="btn-primary">+ Adaugă produs</a>
+        </div>
+
+        <% if (produse.length === 0) { %>
+            <p style="color: #8b6340; font-size: 14px; margin-bottom: 40px;">Nu există produse înregistrate.</p>
+        <% } else { %>
+            <table class="tabel" style="margin-bottom: 48px;">
+                <thead>
+                    <tr>
+                        <th>Nume</th>
+                        <th>Preț</th>
+                        <th>Stoc</th>
+                        <th>Descriere</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% produse.forEach(p => { %>
+                    <tr>
+                        <td>
+                            <a href="/admin/produse/editeaza/<%= p._id %>" 
+                                style="color: #2c1a0e; font-weight: 500; text-decoration: none; border-bottom: 1px solid #d4c4a8;">
+                                <%= p.nume %>
+                            </a>
+                        </td>
+                        <td class="pret-cell"><%= p.pret %> RON</td>
+                        <td>
+                            <% if (p.stoc > 0) { %>
+                                <span class="badge-stoc badge-ok"><%= p.stoc %> buc</span>
+                            <% } else { %>
+                                <span class="badge-stoc badge-red">Epuizat</span>
+                            <% } %>
+                        </td>
+                        <td style="font-size: 13px; color: #8b6340;"><%= p.descriere || '—' %></td>
+                        <td><a href="/admin/produse/sterge/<%= p._id %>" class="btn-danger"
+                            onclick="return confirm('Ștergi produsul <%= p.nume %>?')">Șterge</a></td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } %>
+
+        <!-- ANIMALE -->
+        <div class="section-header">
+            <h2>Animale</h2>
+            <a href="/admin/animale/adauga" class="btn-primary">+ Adaugă animal</a>
+        </div>
+
+        <% if (animale.length === 0) { %>
+            <p style="color: #8b6340; font-size: 14px; margin-bottom: 40px;">Nu există animale înregistrate.</p>
+        <% } else { %>
+            <div class="animal-list" style="margin-bottom: 48px;">
+                <% animale.forEach(a => { %>
+                <div class="animal-row">
+                    <div>
+                        <strong><%= a.nume %></strong>
+                        <p class="animal-specie"><%= a.specie %></p>
+                    </div>
+                    <div style="font-size: 13px; color: #5c3d1e;">
+                        <% if (a.varsta) { %><%= a.varsta %> ani<% } %>
+                    </div>
+                    <div style="font-size: 13px; color: #8b6340; font-style: italic;">
+                        <%= a.descriere || '' %>
+                    </div>
+                    <div>
+                        <a href="/admin/animale/sterge/<%= a._id %>" class="btn-danger"
+                            onclick="return confirm('Ștergi animalul <%= a.nume %>?')">Șterge</a>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        <% } %>
+
+        <!-- VIZITE -->
+        <div class="section-header">
+            <h2>Vizite programate</h2>
+        </div>
+
+        <% if (vizite.length === 0) { %>
+            <p style="color: #8b6340; font-size: 14px;">Nu există vizite programate.</p>
+        <% } else { %>
+            <div class="vizita-list">
+                <% vizite.forEach(v => { %>
+                <div class="vizita-row">
+                    <div>
+                        <strong><%= v.userEmail %></strong>
+                    </div>
+                    <div>
+                        <span>Data</span><br>
+                        <%= v.data %> la <%= v.ora %>
+                    </div>
+                    <div>
+                        <span>Persoane</span><br>
+                        <%= v.persoane %>
+                    </div>
+                    <div style="font-style: italic; color: #8b6340; font-size: 13px;">
+                        <%= v.mesaj || '—' %>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        <% } %>
+        
+        <!-- COMENZI -->
+        <div class="section-header" style="margin-top: 48px;">
+            <h2>Comenzi</h2>
+        </div>
+
+        <% if (comenzi.length === 0) { %>
+            <p style="color: #8b6340; font-size: 14px;">Nu există comenzi înregistrate.</p>
+        <% } else { %>
+            <div class="vizita-list">
+                <% comenzi.forEach(c => { %>
+                <div style="padding: 18px 0; border-bottom: 1px solid #d4c4a8;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <div>
+                            <strong style="font-size: 14px;"><%= c.userEmail %></strong>
+                            <span style="font-size: 12px; color: #8b6340; margin-left: 12px;">
+                                <%= new Date(c.createdAt).toLocaleDateString('ro-RO') %>
+                                <%= new Date(c.createdAt).toLocaleTimeString('ro-RO') %>
+                            </span>
+                        </div>
+                        <strong class="pret-cell"><%= c.total.toFixed(2) %> RON</strong>
+                    </div>
+                    <table class="tabel" style="margin: 0;">
+                        <thead>
+                            <tr>
+                                <th>Produs</th>
+                                <th>Preț</th>
+                                <th>Cantitate</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% c.produse.forEach(p => { %>
+                            <tr>
+                                <td><%= p.nume %></td>
+                                <td><%= p.pret %> RON</td>
+                                <td><%= p.cantitate %> buc</td>
+                                <td class="pret-cell"><%= (p.pret * p.cantitate).toFixed(2) %> RON</td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+                <% }) %>
+            </div>
+        <% } %>
+    </div>
+
+</body>
+</html>

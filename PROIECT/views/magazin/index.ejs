@@ -2,38 +2,61 @@
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
-    <title>Cămara Fermei BoCO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magazin – Ferma BoCo</title>
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <div id="continut-principal">
-        <h1>Salut, fermierule <%= user %>!</h1>
-        
-        <p>Ai vizitat magazinul de <strong><%= views %></strong> ori în această sesiune.</p>
 
-        <% if (ultimaVizita) { %>
-            <p><small>Ultima ta activitate a fost la ora: <%= ultimaVizita %></small></p>
+    <%- include('../partials/navbar', { user, role, page: 'magazin' }) %>
+
+    <div class="page-container">
+        <p class="page-tag">Magazin</p>
+        <h1>Produse disponibile</h1>
+        <p class="page-subtitle">Produse proaspete, direct de la fermă. Adaugă în coș și finalizează comanda.</p>
+
+        <% if (locals.eroare) { %>
+            <div class="auth-error" style="margin-bottom: 24px;">Stoc insuficient pentru cantitatea selectată.</div>
         <% } %>
 
-       <h3>Produse disponibile:</h3>
-        <table border="1" width="100%">
-            <tr>
-                <th>Produs</th>
-                <th>Preț</th>
-                <th>Stoc</th>
-                <th>Descriere</th>
-            </tr>
-            <% produse.forEach(produs => { %>
-            <tr>
-                <td><%= produs.nume %></td>
-                <td><%= produs.pret %> RON</td>
-                <td><%= produs.stoc %></td>
-                <td><%= produs.descriere %></td>
-            </tr>
-            <% }) %>
+        <table class="tabel">
+            <thead>
+                <tr>
+                    <th>Produs</th>
+                    <th>Preț</th>
+                    <th>Stoc</th>
+                    <th>Descriere</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% produse.forEach(produs => { %>
+                <tr>
+                    <td><strong><%= produs.nume %></strong></td>
+                    <td class="pret-cell"><%= produs.pret %> RON</td>
+                    <td>
+                        <% if (produs.stoc > 0) { %>
+                            <span class="badge-stoc badge-ok"><%= produs.stoc %> buc</span>
+                        <% } else { %>
+                            <span class="badge-stoc badge-red">Epuizat</span>
+                        <% } %>
+                    </td>
+                    <td style="color: #8b6340; font-size: 13px;"><%= produs.descriere %></td>
+                    <td>
+                        <% if (produs.stoc > 0) { %>
+                        <form method="POST" action="/cos/adauga" style="display: flex; gap: 8px; align-items: center;">
+                            <input type="hidden" name="produsId" value="<%= produs._id %>">
+                            <input type="number" name="cantitate" value="1" min="1" max="<%= produs.stoc %>"
+                                style="width: 56px; padding: 5px 8px; border: 1px solid #d4c4a8; border-radius: 4px; font-size: 13px; background: #faf7f2;">
+                            <button type="submit" class="btn-primary" style="padding: 6px 14px; font-size: 13px;">Adaugă</button>
+                        </form>
+                        <% } %>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
         </table>
-        <br>
-        <a href="/logout" style="color: red;">Ieșire din cont (Logout)</a>
     </div>
+
 </body>
 </html>

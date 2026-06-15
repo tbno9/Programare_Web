@@ -3,40 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ferma BoCO</title>
+    <title>Ferma BoCo</title>
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <center>
-        <h1>Bine ați venit la Ferma BoCO!</h1>
-        <h2>Marfă de Dănești: când mănânci, întinerești!</h2>
-        <img src="/vacute.png" alt="o vaca grasa" title="salllut" width="500" height="300">
-        
-        <h2>
-            <a href="/login">Login</a> | <a href="/register">Register</a>
-        </h2>
-    </center>
 
-    <div id="continut-principal">
-        <h3>Despre proiect</h3>
-        <p>
-            Aplicația web <strong>Ferma BoCO</strong> este concepută pentru administrarea eficientă a fermei noastre de familie.
-        </p>
+    <nav class="navbar">
+        <a href="/" class="navbar-brand">Ferma <span>BoCo</span></a>
+        <ul class="navbar-links">
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Înregistrare</a></li>
+        </ul>
+    </nav>
 
-        <table border="1" width="100%" bgcolor="#f1f8e9" align="center">
-            <tr>
-                <th colspan="2" bgcolor="#4CAF50" align="center" valign="middle">Oferta Ferma BoCO</th>
-            </tr>
-            <tr>
-                <td width="50%" align="center">
-                    <a href="/magazin">Vizitează Magazinul (Necesar Login)</a>
-                </td>
-                <td width="50%" align="center">
-                    <a href="/register">Vrei să devii client? Înregistrează-te!</a>
-                </td>
-            </tr>
-        </table>
+    <div class="page-container">
+        <p class="page-tag">Dănești, Maramureș</p>
+        <h1>Ferma BoCo</h1>
+        <p class="slogan">„Marfă de Dănești - când mănânci, întinerești!"</p>
+        <p class="page-subtitle">Produse naturale direct de la fermă. Lapte, brânzeturi, ouă și nu numai - comandă online sau vino să ne vizitezi.</p>
 
+        <div class="link-list">
+            <div class="link-row">
+                <div>
+                    <h3>Magazin</h3>
+                    <p>Produse proaspete, direct de la fermă</p>
+                </div>
+                <a href="/login">Intră în magazin</a>
+            </div>
+            <div class="link-row">
+                <div>
+                    <h3>Ferma noastră</h3>
+                    <p>Cunoaște animalele și programează o vizită</p>
+                </div>
+                <a href="/login">Descoperă</a>
+            </div>
+            <div class="link-row">
+                <div>
+                    <h3>Cont nou</h3>
+                    <p>Înregistrează-te pentru a plasa comenzi</p>
+                </div>
+                <a href="/register">Înregistrare</a>
+            </div>
         </div>
+
+        <div class="info-strip">
+            <div>
+                <h4>Produse naturale</h4>
+                <p>Fără aditivi, crescut cu grijă</p>
+            </div>
+            <div>
+                <h4>Fermă de familie</h4>
+                <p>Din Dănești, cu tradiție</p>
+            </div>
+            <div>
+                <h4>Livrare locală</h4>
+                <p>Rapid, în zona Baia Mare</p>
+            </div>
+            <div>
+                <h4>Vizite la fermă</h4>
+                <p>Deschis pentru grupuri și familii</p>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

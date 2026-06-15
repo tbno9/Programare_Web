@@ -9,50 +9,58 @@ mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('CONECTAT CU SUCCES LA MONGODB ATLAS'))
     .catch(err => console.error('EROARE CONECTARE MONGO:', err));
 
-// Importăm rutele și middleware-urile noastre
+// Importam rutele si middleware-urile
 const logger = require('./middleware/logger');
 const authRoutes = require('./routes/auth');
 const magazinRoutes = require('./routes/magazin');
+const adminRoutes = require('./routes/admin');
+const fermaRoutes = require('./routes/ferma');
+const cosRoutes = require('./routes/cos');
 
 const app = express();
 
-// 1. Configurare View Engine (EJS)
+// Configurare View Engine (EJS)
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// 2. Middleware-uri obligatorii
-app.use(express.static(path.join(__dirname, 'public'))); // Pentru CSS și imagini
-app.use(express.urlencoded({ extended: true }));       // Pentru a citi datele din formulare
-app.use(cookieParser());                               // Pentru cookie-uri proprii
+// Middleware-uri obligatorii
+app.use(express.static(path.join(__dirname, 'public'))); // Pentru CSS si imagini
+app.use(express.urlencoded({ extended: true })); // Pentru a citi datele din formulare
+app.use(cookieParser()); // Pentru cookie-uri proprii
 
-// 3. Configurare Sesiuni (Cerința 2.2)
 app.use(session({
     secret: process.env.SESSION_SECRET || 'secret_ferma_boco_123',
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 3600000 } // Sesiunea expiră după 1 oră
+    cookie: { maxAge: 3600000 }
 }));
 
-// 4. Middleware-ul tău propriu de Logging (Cerința 2.4)
-app.use(logger);
-
-// 5. Definirea Rutelor
-// Pagina principală (publică)
-app.get('/', (req, res) => {
-    res.render('acasa'); // Va randa views/acasa.ejs
+app.use((req, res, next) => {
+    res.locals.user = req.session.userId || null;
+    res.locals.role = req.session.role || null;
+    next();
 });
 
-// Rutele pentru Login, Register, Logout
+app.use(logger);
+
+// Definirea Rutelor
+app.get('/', (req, res) => {
+    res.render('acasa');
+});
+
 app.use('/', authRoutes);
 
-// Rutele pentru zona protejată a Magazinului
 app.use('/magazin', magazinRoutes);
 
-// 6. Pornire Server
+app.use('/admin', adminRoutes);
+app.use('/ferma', fermaRoutes);
+app.use('/cos', cosRoutes);
+
+// Pornire Server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`================================0`);
-    console.log(`FERMA BoCO RULEAZĂ PE PORTUL ${PORT}`);
-    console.log(`Adresă: http://localhost:${PORT}`);
+    console.log(`FERMA BoCO RULEAZA PE PORTUL ${PORT}`);
+    console.log(`Adresa: http://localhost:${PORT}`);
     console.log(`================================`);
 });

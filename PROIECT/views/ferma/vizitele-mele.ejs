@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vizitele mele – Ferma BoCo</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <%- include('../partials/navbar', { user, role, page: 'ferma' }) %>
+
+    <div class="page-container">
+        <p class="page-tag">Ferma noastră</p>
+        <h1>Vizitele mele</h1>
+        <p class="page-subtitle">Vizitele programate de tine la Ferma BoCo.</p>
+
+        <% if (vizite.length === 0) { %>
+            <p style="color: #8b6340; font-size: 14px;">
+                Nu ai nicio vizită programată. 
+                <a href="/ferma/vizita" style="color: #4a7c3f;">Programează una →</a>
+            </p>
+        <% } else { %>
+            <div class="vizita-list">
+                <% vizite.forEach(v => { %>
+                <div class="vizita-row">
+                    <div>
+                        <strong><%= v.data %></strong>
+                        <p style="font-size: 12px; color: #8b6340;">Data</p>
+                    </div>
+                    <div>
+                        <strong><%= v.ora %></strong>
+                        <p style="font-size: 12px; color: #8b6340;">Ora</p>
+                    </div>
+                    <div>
+                        <strong><%= v.persoane %></strong>
+                        <p style="font-size: 12px; color: #8b6340;">Persoane</p>
+                    </div>
+                    <div style="font-size: 13px; color: #8b6340; font-style: italic;">
+                        <%= v.mesaj || '—' %>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        <% } %>
+
+        <div style="margin-top: 32px;">
+            <a href="/ferma" class="btn-secondary">Înapoi la fermă</a>
+        </div>
+    </div>
+
+</body>
+</html>

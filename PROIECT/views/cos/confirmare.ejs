@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comandă plasată – Ferma BoCo</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <%- include('../partials/navbar', { user, role, page: 'cos' }) %>
+
+    <div class="page-container">
+        <div class="confirmare-box">
+            <p class="page-tag">Comandă confirmată</p>
+            <h2>Mulțumim pentru comandă!</h2>
+            <p style="font-size: 14px; color: #5c3d1e; line-height: 1.7; margin-bottom: 24px;">
+                Comanda ta a fost înregistrată cu succes. Te vom contacta în curând pentru detalii de livrare.
+            </p>
+            <div style="display: flex; gap: 12px;">
+                <a href="/magazin" class="btn-primary">Continuă cumpărăturile</a>
+                <a href="/ferma" class="btn-secondary">Vizitează ferma</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

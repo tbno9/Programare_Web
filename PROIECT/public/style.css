@@ -1,89 +1,476 @@
-/* Resetare de bază */
+/* =============================================
+   FERMA BOCO – style.css
+   ============================================= */
+
+/* === RESET & BASE === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f1e0be;
-    color: #3e2723; 
-    margin: 0;
-    padding: 20px;
+    background-color: #f5f0e8;
+    color: #2c1a0e;
+    min-height: 100vh;
 }
 
-#continut-principal {
-    max-width: 800px;
-    margin: 20px auto;
-    background-color: #dcffd879;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-    border-top: 5px solid #689f38; /* Verde iarbă */
+/* === NAVBAR === */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    height: 54px;
+    border-bottom: 1px solid #d4c4a8;
+    background-color: #f5f0e8;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
-
-h1 { color: #2e7d32; font-size: 2.5em; margin-bottom: 5px; } 
-h2 { color: #558b2f; font-size: 1.8em; margin-top: 0; font-style: italic; }
-h3 { color: #3e2723; border-bottom: 2px solid #091409; padding-bottom: 5px; }
-h4 { color: #4e342e; }
-h5, h6 { color: #5d4037; }
-
-
-img {
-    border-radius: 8px;
-    border: 3px solid #aed581; 
-}
-
-/* linkuri */
-a {
-    color: #2e7d32;
+.navbar-brand {
+    font-size: 15px;
+    font-weight: 600;
+    color: #2c1a0e;
     text-decoration: none;
-    font-weight: bold;
+    letter-spacing: -0.2px;
 }
-a:hover {
-    color: #1b5e20;
-    text-decoration: underline;
+.navbar-brand span { color: #4a7c3f; }
+
+.navbar-links {
+    display: flex;
+    list-style: none;
+    gap: 24px;
+}
+.navbar-links a {
+    color: #6b4c2a;
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.15s;
+}
+.navbar-links a:hover { color: #2c1a0e; }
+.navbar-links a.active {
+    color: #2c1a0e;
+    font-weight: 500;
+    border-bottom: 1.5px solid #2c1a0e;
+    padding-bottom: 2px;
 }
 
-/* Tabel */
-table {
-    border-collapse: collapse;
-    margin: 20px 0;
+.navbar-user {
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
-th {
-    color: white;
-    font-size: 1.1em;
-    padding: 10px;
+.navbar-email {
+    font-size: 12px;
+    color: #8b6340;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
-td {
-    padding: 15px;
+.badge-admin {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #4a7c3f;
+    border: 1px solid #4a7c3f;
+    padding: 2px 7px;
+    border-radius: 3px;
+}
+.btn-logout {
+    font-size: 12px;
+    color: #6b4c2a;
+    text-decoration: none;
+    border: 1px solid #d4c4a8;
+    padding: 4px 12px;
+    border-radius: 4px;
+    transition: border-color 0.15s, color 0.15s;
+}
+.btn-logout:hover {
+    border-color: #2c1a0e;
+    color: #2c1a0e;
 }
 
-/* formular si inputuri */
-fieldset {
-    border: 2px solid #81c784;
+/* === PAGE CONTAINER === */
+.page-container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 56px 32px 80px;
+}
+
+/* === TYPOGRAPHY === */
+.page-tag {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #4a7c3f;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+h1 {
+    font-size: 26px;
+    font-weight: 600;
+    color: #2c1a0e;
+    letter-spacing: -0.4px;
+    margin-bottom: 8px;
+}
+h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c1a0e;
+    margin-bottom: 16px;
+}
+h3 {
+    font-size: 15px;
+    font-weight: 500;
+    color: #2c1a0e;
+    margin-bottom: 4px;
+}
+.page-subtitle {
+    font-size: 14px;
+    color: #5c3d1e;
+    line-height: 1.7;
+    margin-bottom: 40px;
+    max-width: 480px;
+}
+.slogan {
+    font-size: 13px;
+    color: #8b6340;
+    font-style: italic;
+    margin-bottom: 12px;
+}
+
+/* === LINK ROWS (lista simpla) === */
+.link-list {
+    border-top: 1px solid #d4c4a8;
+    margin-bottom: 40px;
+}
+.link-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0;
+    border-bottom: 1px solid #d4c4a8;
+}
+.link-row p {
+    font-size: 13px;
+    color: #8b6340;
+    margin-top: 3px;
+}
+.link-row a {
+    font-size: 13px;
+    color: #4a7c3f;
+    text-decoration: none;
+    font-weight: 500;
+    white-space: nowrap;
+}
+.link-row a:hover { text-decoration: underline; }
+
+/* === INFO STRIP === */
+.info-strip {
+    background: #ece4d4;
     border-radius: 8px;
-    background-color: #f1f8e9;
+    padding: 28px 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 32px;
+}
+.info-strip h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #2c1a0e;
+    margin-bottom: 3px;
+}
+.info-strip p {
+    font-size: 13px;
+    color: #6b4c2a;
+    line-height: 1.6;
+}
+
+/* === TABEL === */
+.tabel {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-bottom: 32px;
+}
+.tabel thead tr {
+    border-bottom: 2px solid #d4c4a8;
+}
+.tabel th {
+    text-align: left;
+    padding: 10px 12px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #8b6340;
+    font-weight: 500;
+}
+.tabel td {
+    padding: 14px 12px;
+    border-bottom: 1px solid #ece4d4;
+    color: #2c1a0e;
+    vertical-align: middle;
+}
+.tabel tbody tr:hover { background-color: #ece4d4; }
+.pret-cell { font-weight: 600; color: #4a7c3f; }
+
+/* === BADGE STOC === */
+.badge-stoc {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+}
+.badge-ok { background: #ddeedd; color: #2d5a27; }
+.badge-red { background: #f5ddd8; color: #8b2a1a; }
+
+/* === SECTION HEADER === */
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #d4c4a8;
+}
+
+/* === FORM === */
+.form-block {
+    max-width: 480px;
+}
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 20px;
+}
+.field label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #5c3d1e;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+}
+.field input,
+.field select,
+.field textarea {
+    border: 1px solid #d4c4a8;
+    border-radius: 5px;
+    padding: 9px 12px;
+    font-family: inherit;
+    font-size: 14px;
+    color: #2c1a0e;
+    background: #faf7f2;
+    transition: border-color 0.15s;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+    outline: none;
+    border-color: #4a7c3f;
+}
+.field textarea { resize: vertical; min-height: 90px; }
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+/* === BUTTONS === */
+.btn-primary {
+    background-color: #4a7c3f;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s;
+    text-decoration: none;
+    display: inline-block;
+}
+.btn-primary:hover { background-color: #3a6331; color: white; }
+
+.btn-secondary {
+    background-color: transparent;
+    color: #6b4c2a;
+    border: 1px solid #d4c4a8;
+    padding: 9px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+    text-decoration: none;
+    display: inline-block;
+}
+.btn-secondary:hover { border-color: #6b4c2a; color: #2c1a0e; }
+
+.btn-danger {
+    font-size: 12px;
+    color: #8b2a1a;
+    text-decoration: none;
+    border: 1px solid #e0c4be;
+    padding: 4px 10px;
+    border-radius: 4px;
+    transition: border-color 0.15s;
+}
+.btn-danger:hover { border-color: #8b2a1a; }
+
+/* === STATS (admin) === */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 48px;
+}
+.stat-box {
+    background: #ece4d4;
+    border-radius: 6px;
+    padding: 20px 24px;
+}
+.stat-value {
+    font-size: 26px;
+    font-weight: 600;
+    color: #2c1a0e;
+    margin-bottom: 4px;
+}
+.stat-label {
+    font-size: 12px;
+    color: #8b6340;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+/* === CONFIRMARE === */
+.confirmare-box {
+    max-width: 480px;
+    padding: 40px 0;
+}
+.confirmare-box h2 { margin-bottom: 12px; }
+.confirmare-box p { font-size: 14px; color: #5c3d1e; line-height: 1.7; margin-bottom: 8px; }
+.confirmare-detail {
+    background: #ece4d4;
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 24px 0;
+    font-size: 14px;
+    line-height: 2;
+    color: #2c1a0e;
+}
+.confirmare-detail span { color: #8b6340; }
+
+/* === COS (coș cumpărături) === */
+.cos-total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0;
+    border-top: 2px solid #d4c4a8;
+    margin-top: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #2c1a0e;
+}
+
+/* === AUTH === */
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f0e8;
     padding: 20px;
 }
-legend {
-    background-color: #4CAF50;
-    color: white;
-    padding: 5px 15px;
+.auth-card {
+    background: #faf7f2;
+    border-radius: 8px;
+    padding: 40px 36px;
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #d4c4a8;
+}
+.auth-brand {
+    font-size: 15px;
+    font-weight: 600;
+    color: #2c1a0e;
+    margin-bottom: 6px;
+}
+.auth-brand span { color: #4a7c3f; }
+.auth-slogan {
+    font-size: 12px;
+    color: #8b6340;
+    font-style: italic;
+    margin-bottom: 32px;
+}
+.auth-card h2 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.auth-subtitle {
+    font-size: 13px;
+    color: #8b6340;
+    margin-bottom: 24px;
+}
+.auth-error {
+    background: #f5ddd8;
+    color: #8b2a1a;
+    border: 1px solid #e0c4be;
     border-radius: 5px;
-    font-weight: bold;
+    padding: 10px 14px;
+    margin-bottom: 18px;
+    font-size: 13px;
 }
-input[type="text"], input[type="number"], select, textarea {
-    border: 1px solid #c5e1a5;
-    border-radius: 4px;
-    padding: 8px;
-    font-family: inherit;
+.auth-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 13px;
+    color: #8b6340;
 }
-input[type="text"]:focus, textarea:focus {
-    outline: none;
-    border-color: #689f38;
-    box-shadow: 0 0 5px rgba(104, 159, 56, 0.5);
+.auth-link a { color: #4a7c3f; font-weight: 500; }
+
+/* === ANIMALE === */
+.animal-list { border-top: 1px solid #d4c4a8; }
+.animal-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid #d4c4a8;
+    font-size: 14px;
+}
+.animal-specie {
+    font-size: 12px;
+    color: #8b6340;
+    margin-top: 2px;
 }
 
-/* Clasa specială creată în HTML */
-.text-sanatos {
-    color: #2e7d32;
-    font-weight: bold;
-    text-transform: uppercase;
+/* === VIZITE (admin) === */
+.vizita-list { border-top: 1px solid #d4c4a8; }
+.vizita-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 80px 1fr;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid #d4c4a8;
+    font-size: 14px;
+    color: #2c1a0e;
+}
+.vizita-row span { color: #8b6340; font-size: 12px; }
+
+/* === RESPONSIVE === */
+@media (max-width: 600px) {
+    .navbar { padding: 0 16px; }
+    .navbar-email { display: none; }
+    .page-container { padding: 36px 16px 60px; }
+    .form-row { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: 1fr; }
+    .info-strip { grid-template-columns: 1fr; }
+    .animal-row { grid-template-columns: 1fr 1fr; }
+    .vizita-row { grid-template-columns: 1fr 1fr; }
 }

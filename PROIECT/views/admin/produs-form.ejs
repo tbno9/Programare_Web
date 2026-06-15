@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= produs ? 'Editează produs' : 'Adaugă produs' %> – Ferma BoCo</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <%- include('../partials/navbar', { user, role, page: 'adauga-produs' }) %>
+
+    <div class="page-container">
+        <p class="page-tag">Administrator</p>
+        <h1><%= produs ? 'Editează produs' : 'Adaugă produs' %></h1>
+        <p class="page-subtitle">Completează datele produsului.</p>
+
+        <% if (locals.eroare) { %>
+            <div class="auth-error" style="margin-bottom: 24px;"><%= eroare %></div>
+        <% } %>
+
+        <form method="POST" 
+            action="<%= produs ? '/admin/produse/editeaza/' + produs._id : '/admin/produse/adauga' %>" 
+            class="form-block">
+            <div class="field">
+                <label for="nume">Nume produs</label>
+                <input type="text" id="nume" name="nume" 
+                    value="<%= produs ? produs.nume : '' %>"
+                    placeholder="ex: Lapte proaspăt" required>
+            </div>
+            <div class="form-row">
+                <div class="field">
+                    <label for="pret">Preț (RON)</label>
+                    <input type="number" id="pret" name="pret" min="0" step="0.01"
+                        value="<%= produs ? produs.pret : '' %>"
+                        placeholder="ex: 8.50" required>
+                </div>
+                <div class="field">
+                    <label for="stoc">Stoc (bucăți)</label>
+                    <input type="number" id="stoc" name="stoc" min="0"
+                        value="<%= produs ? produs.stoc : '' %>"
+                        placeholder="ex: 100" required>
+                </div>
+            </div>
+            <div class="field">
+                <label for="descriere">Descriere</label>
+                <textarea id="descriere" name="descriere" 
+                    placeholder="Scurtă descriere a produsului..."><%= produs ? produs.descriere : '' %></textarea>
+            </div>
+            <div style="display: flex; gap: 12px;">
+                <button type="submit" class="btn-primary">
+                    <%= produs ? 'Salvează modificările' : 'Adaugă produsul' %>
+                </button>
+                <a href="/admin" class="btn-secondary">Anulează</a>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

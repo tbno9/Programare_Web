@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferma – Ferma BoCo</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <%- include('../partials/navbar', { user, role, page: 'ferma' }) %>
+
+    <div class="page-container">
+        <p class="page-tag">Ferma noastră</p>
+        <h1>Animalele noastre</h1>
+        <p class="page-subtitle">Cunoaște animalele de la Ferma BoCo. Toate sunt crescute cu grijă, în condiții naturale.</p>
+
+        <% if (animale.length === 0) { %>
+            <p style="color: #8b6340; font-size: 14px;">Nu există animale înregistrate momentan.</p>
+        <% } else { %>
+            <div class="animal-list">
+                <% animale.forEach(animal => { %>
+                <div class="animal-row">
+                    <div>
+                        <strong><%= animal.nume %></strong>
+                        <p class="animal-specie"><%= animal.specie %></p>
+                    </div>
+                    <div style="font-size: 13px; color: #5c3d1e;">
+                        <% if (animal.varsta) { %><%= animal.varsta %> ani<% } %>
+                    </div>
+                    <div style="font-size: 13px; color: #8b6340; font-style: italic;">
+                        <%= animal.descriere || '' %>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        <% } %>
+
+        <div style="margin-top: 48px; padding-top: 32px; border-top: 1px solid #d4c4a8;">
+            <h2>Programează o vizită</h2>
+            <p class="page-subtitle">Vino să ne vizitezi! Completează formularul și te contactăm pentru confirmare.</p>
+            <a href="/ferma/vizita" class="btn-primary">Programează vizita</a>
+            <a href="/ferma/vizitele-mele" class="btn-secondary">Vizitele mele</a>
+        </div>
+    </div>
+
+</body>
+</html>

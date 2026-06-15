@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coș – Ferma BoCo</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <%- include('../partials/navbar', { user, role, page: 'cos' }) %>
+
+    <div class="page-container">
+        <p class="page-tag">Coș de cumpărături</p>
+        <h1>Comanda ta</h1>
+
+        <% if (items.length === 0) { %>
+            <p class="page-subtitle">Coșul tău este gol. <a href="/magazin" style="color: #4a7c3f;">Înapoi la magazin</a></p>
+        <% } else { %>
+
+            <table class="tabel">
+                <thead>
+                    <tr>
+                        <th>Produs</th>
+                        <th>Preț unitar</th>
+                        <th>Cantitate</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% items.forEach(item => { %>
+                    <tr>
+                        <td><strong><%= item.nume %></strong></td>
+                        <td class="pret-cell"><%= item.pret %> RON</td>
+                        <td><%= item.cantitate %> buc</td>
+                        <td class="pret-cell"><%= (item.pret * item.cantitate).toFixed(2) %> RON</td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+
+            <div class="cos-total">
+                <span>Total</span>
+                <span><%= total.toFixed(2) %> RON</span>
+            </div>
+
+            <div style="display: flex; gap: 12px; margin-top: 24px;">
+                <form method="POST" action="/cos/finalizeaza">
+                    <button type="submit" class="btn-primary">Finalizează comanda</button>
+                </form>
+                <a href="/cos/goleste" class="btn-secondary">Golește coșul</a>
+                <a href="/magazin" class="btn-secondary">Înapoi la magazin</a>
+            </div>
+
+        <% } %>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adaugă animal – Ferma BoCo</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <%- include('../partials/navbar', { user, role, page: 'adauga-animal' }) %>
+
+    <div class="page-container">
+        <p class="page-tag">Administrator</p>
+        <h1>Adaugă animal</h1>
+        <p class="page-subtitle">Completează datele animalului.</p>
+
+        <% if (locals.eroare) { %>
+            <div class="auth-error" style="margin-bottom: 24px;"><%= eroare %></div>
+        <% } %>
+
+        <form method="POST" action="/admin/animale/adauga" class="form-block">
+            <div class="form-row">
+                <div class="field">
+                    <label for="nume">Nume</label>
+                    <input type="text" id="nume" name="nume" placeholder="ex: Bella" required>
+                </div>
+                <div class="field">
+                    <label for="specie">Specie</label>
+                    <input type="text" id="specie" name="specie" placeholder="ex: Vacă" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="field">
+                    <label for="varsta">Vârstă (ani)</label>
+                    <input type="number" id="varsta" name="varsta" min="0" placeholder="ex: 3">
+                </div>
+            </div>
+            <div class="field">
+                <label for="descriere">Descriere</label>
+                <textarea id="descriere" name="descriere" placeholder="Câteva cuvinte despre acest animal..."></textarea>
+            </div>
+            <div style="display: flex; gap: 12px;">
+                <button type="submit" class="btn-primary">Salvează</button>
+                <a href="/admin" class="btn-secondary">Anulează</a>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

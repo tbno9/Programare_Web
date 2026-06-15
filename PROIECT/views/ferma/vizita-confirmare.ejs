@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vizită programată – Ferma BoCo</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <%- include('../partials/navbar', { user, role, page: 'ferma' }) %>
+
+    <div class="page-container">
+        <div class="confirmare-box">
+            <p class="page-tag">Cerere trimisă</p>
+            <h2>Vizita a fost programată!</h2>
+            <p style="font-size: 14px; color: #5c3d1e; line-height: 1.7;">
+                Am primit cererea ta. Te vom contacta în curând pentru confirmare.
+            </p>
+
+            <div class="confirmare-detail">
+                <div><span>Data:</span> <%= data %></div>
+                <div><span>Ora:</span> <%= ora %></div>
+                <div><span>Persoane:</span> <%= persoane %></div>
+            </div>
+
+            <div style="display: flex; gap: 12px;">
+                <a href="/magazin" class="btn-primary">Mergi la magazin</a>
+                <a href="/ferma" class="btn-secondary">Înapoi la fermă</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
